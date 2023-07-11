@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout/header :: header(~{::title})}">
+    <title>스프링 부트 웹 서비스 - 게시글</title>
+</head>
+<body>
+<div class="container">
+    <h1>게시글</h1>
+    <table class="table table-hover table-bordered">
+        <thead class="thead-dark">
+        <tr>
+            <th>#</th>
+            <th>제목</th>
+            <th>내용</th>
+            <th>작가</th>
+            <th>시간</th>
+        </tr>
+        </thead>
+        <tr th:each="post : ${posts}">
+            <td th:text="${post.id}"></td>
+            <td th:text="${post.title}"></td>
+            <td th:text="${post.content}"></td>
+            <td th:text="${post.author}"></td>
+            <td th:text="${#temporals.format(post.modifiedDate, 'yyyy-MM-dd HH:mm:ss')}"></td>
+        </tr>
+    </table>
+    <th:block th:replace="~{layout/footer :: footer}"></th:block>
+</div>
+</body>
+</html>
