@@ -4,14 +4,13 @@ import com.jojoldu.book.springbootwebservice.service.PostsService;
 import com.jojoldu.book.springbootwebservice.web.dto.PostsListResponseDto;
 import com.jojoldu.book.springbootwebservice.web.dto.PostsResponseDto;
 import com.jojoldu.book.springbootwebservice.web.dto.PostsSaveRequestDto;
+import com.jojoldu.book.springbootwebservice.web.dto.PostsUpdateRequestDto;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -40,6 +39,20 @@ public class IndexController {
         List<PostsListResponseDto> posts = postsService.findAll();
         model.addAttribute("posts", posts);
         return "posts-list";
+    }
+
+    @GetMapping("/posts/{id}/edit")
+    public String updateForm(@PathVariable Long id, Model model) {
+        PostsResponseDto dto = postsService.findById(id);
+        model.addAttribute("posts", dto);
+        return "posts-update";
+    }
+
+    @PostMapping("/posts/{id}/edit")
+    public String update(@PathVariable Long id, @RequestParam String title, @RequestParam String content) {
+        PostsUpdateRequestDto requestDto = new PostsUpdateRequestDto(title, content);
+        postsService.update(id, requestDto);
+        return "redirect:/posts";
     }
 
     @PostConstruct
