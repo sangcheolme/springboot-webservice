@@ -55,6 +55,12 @@ public class IndexController {
         return "redirect:/posts";
     }
 
+    @PostMapping("/posts/{id}/delete")
+    public String delete(@PathVariable Long id) {
+        postsService.delete(id);
+        return "redirect:/posts";
+    }
+
     @PostConstruct
     public void init() {
         PostsSaveRequestDto requestDto1 = new PostsSaveRequestDto("테스트", "내용1", "작가1");
