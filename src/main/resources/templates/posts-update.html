@@ -5,6 +5,7 @@
 </head>
 <body>
 <div class="container">
+    <div th:replace="layout/bodyHeader :: bodyHeader"></div>
     <h1>게시글 수정</h1>
     <div class="col-md-12">
         <div class="col-md-4">
@@ -26,7 +27,7 @@
                     <input type="text" class="form-control" th:field="*{author}" placeholder="작성자를 입력하세요" readonly>
                 </div>
 
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" class="btn btn-primary">수정 완료</button>
             </form>
         </div>
     </div>
