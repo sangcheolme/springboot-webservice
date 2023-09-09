@@ -17,45 +17,46 @@ import java.util.List;
 @Slf4j
 @RequiredArgsConstructor
 @Controller
+@RequestMapping("/posts")
 public class IndexController {
 
     private final PostsService postsService;
 
-    @GetMapping("/posts/save")
+    @GetMapping("/save")
     public String postsSave(Model model) {
         model.addAttribute("posts", new PostsSaveRequestDto());
         return "posts-save";
     }
 
-    @PostMapping("/posts/save")
+    @PostMapping("/save")
     public String postsSave(@RequestParam String title, @RequestParam String content, @RequestParam String author) {
         PostsSaveRequestDto requestDto = new PostsSaveRequestDto(title, content, author);
         postsService.save(requestDto);
         return "redirect:/";
     }
 
-    @GetMapping("/posts")
+    @GetMapping
     public String posts(Model model) {
         List<PostsListResponseDto> posts = postsService.findAll();
         model.addAttribute("posts", posts);
         return "posts-list";
     }
 
-    @GetMapping("/posts/{id}/edit")
+    @GetMapping("/{id}/edit")
     public String updateForm(@PathVariable Long id, Model model) {
         PostsResponseDto dto = postsService.findById(id);
         model.addAttribute("posts", dto);
         return "posts-update";
     }
 
-    @PostMapping("/posts/{id}/edit")
+    @PostMapping("/{id}/edit")
     public String update(@PathVariable Long id, @RequestParam String title, @RequestParam String content) {
         PostsUpdateRequestDto requestDto = new PostsUpdateRequestDto(title, content);
         postsService.update(id, requestDto);
         return "redirect:/posts";
     }
 
-    @PostMapping("/posts/{id}/delete")
+    @PostMapping("/{id}/delete")
     public String delete(@PathVariable Long id) {
         postsService.delete(id);
         return "redirect:/posts";
@@ -63,7 +64,7 @@ public class IndexController {
 
     @PostConstruct
     public void init() {
-        PostsSaveRequestDto requestDto1 = new PostsSaveRequestDto("테스트", "내용1", "작가1");
+        PostsSaveRequestDto requestDto1 = new PostsSaveRequestDto("제목1", "내용1", "작가1");
         PostsSaveRequestDto requestDto2 = new PostsSaveRequestDto("제목2", "내용2", "작가2");
         PostsSaveRequestDto requestDto3 = new PostsSaveRequestDto("제목3", "내용3", "작가3");
         postsService.save(requestDto1);
