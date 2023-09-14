@@ -7,24 +7,32 @@
 <div class="container">
     <div th:replace="~{layout/bodyHeader :: bodyHeader}"></div>
     <h1>게시글</h1>
-    <table class="table table-hover table-bordered">
-        <thead class="thead-dark">
-        <tr>
-            <th>#</th>
-            <th>제목</th>
-            <th>내용</th>
-            <th>작가</th>
-            <th>시간</th>
-        </tr>
-        </thead>
-        <tr th:each="post : ${posts}">
-            <td th:text="${post.id}"></td>
-            <td><a th:href="@{/posts/{id}/edit(id=${post.id})}" th:text="${post.title}"></a></td>
-            <td th:text="${post.content}"></td>
-            <td th:text="${post.author}"></td>
-            <td th:text="${#temporals.format(post.modifiedDate, 'yyyy-MM-dd HH:mm:ss')}"></td>
-        </tr>
-    </table>
+<!--    <table class="table table-hover table-bordered">-->
+<!--        <thead class="thead-dark">-->
+<!--        <tr>-->
+<!--            <th>#</th>-->
+<!--            <th>제목</th>-->
+<!--            <th>내용</th>-->
+<!--            <th>작가</th>-->
+<!--            <th>시간</th>-->
+<!--        </tr>-->
+<!--        </thead>-->
+<!--        <tr th:each="post : ${posts}">-->
+<!--            <td th:text="${post.id}"></td>-->
+<!--            <td><a th:href="@{/posts/{id}/edit(id=${post.id})}" th:text="${post.title}"></a></td>-->
+<!--            <td th:text="${post.content}"></td>-->
+<!--            <td th:text="${post.author}"></td>-->
+<!--            <td th:text="${#temporals.format(post.modifiedDate, 'yyyy-MM-dd HH:mm:ss')}"></td>-->
+<!--        </tr>-->
+<!--    </table>-->
+    <div class="card" th:each="post : ${posts}" style="width: 18rem;">
+        <img src="/img/mac.png" class="card-img-top" alt="...">
+        <div class="card-body">
+            <h5 class="card-title" th:text="${post.title}">Card title</h5>
+            <p class="card-text" th:text="${post.content}"></p>
+            <a href="" th:href="@{/posts/{id}/edit(id=${post.id})}" class="btn btn-primary">Go somewhere</a>
+        </div>
+    </div>
     <th:block th:replace="~{layout/footer :: footer}"></th:block>
 </div>
 </body>

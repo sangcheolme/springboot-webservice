@@ -2,12 +2,11 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <!--<head th:replace="layout/header :: common_header(~{::title})">-->
 <head th:replace="~{layout/header :: header(~{::title})}">
-    <title th:text="#{title}">블로그</title>
+    <title th:text="#{title}">블로그 이름</title>
 </head>
 <body>
 <div class="container">
     <div th:replace="~{layout/bodyHeader :: bodyHeader}"></div>
-    <h1 th:text="#{title}">블로그</h1>
     <div class="col-md-12">
         <div class="row">
             <div class="col-md-6">

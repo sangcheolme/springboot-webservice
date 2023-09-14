@@ -4,22 +4,24 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.*;
 
+@Transactional
 @SpringBootTest
 class PostsRepositoryTest {
 
     @Autowired
     PostsRepository postsRepository;
 
-    @AfterEach
-    public void cleanup() {
-        postsRepository.deleteAll();
-    }
+//    @AfterEach
+//    public void cleanup() {
+//        postsRepository.deleteAll();
+//    }
 
     @Test
     void 게시물저장_불러오기() throws Exception {
